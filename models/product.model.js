@@ -10,3 +10,5 @@ const productSchema = new mongoose.Schema({
     stock_quantity: { type: Number, default: 0 },
     attributes: { type: Map, of: String }
 })
+
+module.exports = mongoose.exports('product',productSchema)
