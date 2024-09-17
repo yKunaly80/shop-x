@@ -1,9 +1,10 @@
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema({
-    email: { type: String, require: true, unique: true },
-    name: { type: String, require: true },
-    mobile_nummber: { type: Number, require: true },
+    emailId: { type: String, require: true, unique: true },
+    firstName: { type: String, require: true },
+    lastName: { type: String, require: true },
+    mobileNumber: { type: String, require: true },
     password: { type: String, require: true }
 })
 

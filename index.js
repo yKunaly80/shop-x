@@ -1,17 +1,29 @@
-
+const dotenv = require('dotenv');
 const http = require('http');
-const mongoDBConnection = require('./configs/database')
+const mongoose = require('mongoose')
 const app = require('./app');
 
+dotenv.config()
+
 const main = async () => {
+    try {
 
-    await mongoDBConnection()
+        await mongoose.connect(process.env.DB_URI)
+        console.log('MongoDb Connected Sucessfully');
 
-    const server = http.createServer(app);
-    const PORT = 9008;
-    server.listen(PORT, '0.0.0.0', () => {
-        console.log(`Server is running on http://192.168.0.105:${PORT}`)
-    });
+        const server = http.createServer(app);
+        const PORT = process.env.PORT;
+
+        server.listen(PORT, '0.0.0.0', () => {
+            console.log(`Server is running on :\nhttp://localhost:${PORT}\nhttp://192.168.0.105:${PORT}`)
+        });
+
+        // server.listen(PORT, '0.0.0.0')
+        // console.log(`Server is running on :\nhttp://localhost:${PORT}\nhttp://192.168.0.105:${PORT}`)
+
+    } catch (error) {
+        console.log('error==>', error)
+    }
 }
 
 main()
